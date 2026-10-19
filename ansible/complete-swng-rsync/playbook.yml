@@ -30,7 +30,7 @@
 
     - name: Perform initial SWNG repository sync
       command: >
-        rsync -av --delete
+        rsync -avH --delete
         --progress
         --log-file={{ sync_log_file }}
         {{ rsync_source }}
