@@ -13,7 +13,7 @@ This Docker setup creates a containerized SWNG repository mirror that automatica
 Approximate requirements:
 - **CPU**: 2-4 cores recommended
 - **Memory**: 2-4 GB RAM recommended
-- **Disk**: 500 GB - 1+ TB recommended
+- **Disk**: ~600 GB - 1+ TB recommended
 - **Network**: Stable, high-bandwidth connection
 
 ### Environment Variables

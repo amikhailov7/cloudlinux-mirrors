@@ -5,7 +5,7 @@ This Docker setup creates a containerized mirror of both CloudLinux and SWNG rep
 ## Prerequisites
 
 - Docker or Docker Compose
-- Sufficient disk space (500 GB - 1+ TB recommended)
+- Sufficient disk space (~4 TB for a full combined mirror with `rsync -H`: SWNG ~600 GB + CloudLinux ~3.4 TB)
 - Network access to `rsync.upstream.cloudlinux.com`
 
 ## Resource Requirements
@@ -13,8 +13,10 @@ This Docker setup creates a containerized mirror of both CloudLinux and SWNG rep
 Approximate requirements:
 - **CPU**: 2-4 cores recommended
 - **Memory**: 2-4 GB RAM recommended
-- **Disk**: 500 GB - 1+ TB recommended
+- **Disk**: ~4 TB recommended
 - **Network**: Stable, high-bandwidth connection
+
+> The CloudLinux (`/cloudlinux/`) half is useful only for clients you point at it manually (`baseurl`) or for offline use. The public mirrorlist service hands out only `/swng/` URLs, so registering a mirror never sends it `/cloudlinux/` traffic.
 
 ### Environment Variables
 

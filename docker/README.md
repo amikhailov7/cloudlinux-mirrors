@@ -98,7 +98,7 @@ docker compose logs -f
 |---------|---------------------|------------------------|--------------|-----------------|
 | Repository Type | SWNG only | SWNG (version-specific) | SWNG (selective) | CloudLinux + SWNG |
 | Sync Method | RSync | RSync | reposync | RSync |
-| Disk Space | ~200-500 GB | ~100-200 GB | Varies | ~500 GB - 1+ TB |
+| Disk Space | ~600 GB | ~100-200 GB | Varies | ~4 TB |
 | Sync Speed | Fast | Fast | Moderate | Fast |
 | Selectivity | Complete | Version-based | Repository-based | Complete |
 | Web Server | No | No | No | Yes (optional) |
@@ -169,10 +169,10 @@ tar -czf logs-backup-$(date +%Y%m%d).tar.gz logs/
 
 ### Disk Space
 
-- **Complete SWNG**: ~500 GB
+- **Complete SWNG**: ~600 GB with `rsync -H` (~760 GB without)
 - **Specific Version**: 100-200 GB per version
 - **yum-reposync**: Varies by repositories
-- **Combined Mirror**: SWNG (~500 GB) + CloudLinux repository (3+ TB)
+- **Combined Mirror**: ~4 TB with `rsync -H`: SWNG (~600 GB) + CloudLinux repository (~3.4 TB)
 
 **Recommendations:**
 - Use a dedicated disk or partition for mirror storage.

@@ -47,7 +47,7 @@ Mirrors the **entire SWNG** repository (all supported versions).
 - Complete SWNG mirror using RSync
 - Systemd timers for automated updates
 - Best for: central mirror serving multiple CloudLinux versions
-- Storage: ~500 GB
+- Storage: ~600 GB with `rsync -H` (~760 GB without)
 
 Each setup method has its own detailed README:
 
@@ -107,10 +107,10 @@ Mirrors both **SWNG** and **repo.cloudlinux.com** (conversion/legacy content) in
 
 - Combined or separate sync modes
 - Best for: fully autonomous environments (install + conversion + updates)
-- Storage: highest (SWNG ~500 GB + CloudLinux repo 3+ TB)
+- Storage: highest (~4 TB with `rsync -H`: SWNG ~600 GB + CloudLinux repo ~3.4 TB)
 - Paths: `ansible/combined-mirror/` | `docker/combined-mirror/`
 
-> Most production environments only need SWNG. Mirror `repo.cloudlinux.com` only if you require conversion tools, installation images, or a fully offline environment.
+> Most production environments only need SWNG. Mirror `repo.cloudlinux.com` only if you require conversion tools, installation images, or a fully offline environment. The public mirrorlist service hands out only `/swng/` URLs, so a registered mirror never receives `/cloudlinux/` traffic.
 
 ### Mirror Type Comparison
 
@@ -118,7 +118,7 @@ Mirrors both **SWNG** and **repo.cloudlinux.com** (conversion/legacy content) in
 |---------|---------------------|------------------------|--------------|-----------------|
 | Scope | SWNG (all versions) | SWNG (one version) | SWNG (selected repos) | SWNG + CloudLinux |
 | Sync method | RSync | RSync | reposync | RSync |
-| Storage | ~500 GB | ~100-200 GB | Varies | 500 GB - 3+ TB |
+| Storage | ~600 GB | ~100-200 GB | Varies | ~4 TB |
 | Selectivity | Complete | Version-based | Repository-based | Complete |
 | Best for | **Most environments** | Single-version | Fine-grained control | Full autonomous |
 
@@ -195,8 +195,8 @@ curl -I https://mirror.yourdomain.com/swng/
 
 | Repository | Content | Size |
 |---|---|---|
-| **SWNG** | Main operational repository — all packages for day-to-day CloudLinux operations, security and feature updates | ~500 GB |
-| **CloudLinux** (`repo.cloudlinux.com`) | Conversion tools, installation images/ISOs, legacy packages, SRPMs | 3+ TB |
+| **SWNG** | Main operational repository — all packages for day-to-day CloudLinux operations, security and feature updates | ~600 GB with `rsync -H` (~760 GB without) |
+| **CloudLinux** (`repo.cloudlinux.com`) | Conversion tools, installation images/ISOs, legacy packages, SRPMs | ~3.4 TB with `rsync -H` (~3.8 TB without) |
 
 ### HTTPS Access
 
@@ -229,7 +229,7 @@ rsync -avH --delete --numeric-ids --safe-links \
 rsync -avH --delete --numeric-ids --safe-links \
   rsync://rsync.upstream.cloudlinux.com/SWNG/10/ /var/www/mirrors/swng/10/
 
-# Mirror CloudLinux repo (3+ TB — partial sync recommended)
+# Mirror CloudLinux repo (~3.4 TB — partial sync recommended)
 rsync -avH --delete --numeric-ids --safe-links \
   rsync://rsync.upstream.cloudlinux.com/CLOUDLINUX/ /var/www/mirrors/cloudlinux/
 ```

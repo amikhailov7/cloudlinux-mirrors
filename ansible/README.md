@@ -80,7 +80,7 @@ ansible-playbook -i inventory.ini playbook.yml
 
 **Storage recommendation:**
 - Use a dedicated disk or partition for mirror storage.
-- SWNG is ~500 GB; the full `repo.cloudlinux.com` repository is 3+ TB.
+- With `rsync -H`, SWNG is ~600 GB (~760 GB without) and the full `repo.cloudlinux.com` repository is ~3.4 TB (~3.8 TB without).
 - In most cases, sync `repo.cloudlinux.com` only partially (only the repositories you need).
 
 ## Common Variables
@@ -97,7 +97,7 @@ Most playbooks support these common variables:
 |---------|---------------------|-------------------------|--------------|-------|
 | Repository Type | SWNG only           | SWNG (version-specific) | SWNG (selective) | CloudLinux + SWNG |
 | Sync Method | RSync               | RSync                   | reposync | RSync |
-| Disk Space | ~300-500 GB         | ~200-300 GB             | Varies | 2+ TB |
+| Disk Space | ~600 GB             | ~200-300 GB             | Varies | ~4 TB |
 | Sync Speed | Fast                | Fast                    | Moderate | Fast |
 | Selectivity | Complete            | Version-based           | Repository-based | Complete |
 | Best For | Complete SWNG       | Specific versions       | Selective repos | Complete setup |

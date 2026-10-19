@@ -7,7 +7,7 @@ This Ansible playbook sets up a complete local mirror of both CloudLinux and SWN
 - Ansible 2.9 or later
 - Target server(s) with:
   - OS almalinux 9 or 10
-  - Sufficient disk space (several hundred GB to 1+ TB recommended)
+  - Sufficient disk space (~4 TB for a full combined mirror)
   - Root or sudo access
   - Network access to `rsync.upstream.cloudlinux.com`
   - Systemd support
@@ -16,9 +16,11 @@ This Ansible playbook sets up a complete local mirror of both CloudLinux and SWN
 
 Approximate disk space requirements:
 
-- **CloudLinux only**: 200-500 GB
-- **SWNG only**: 200-500 GB
-- **Combined**: 500 GB - 1+ TB
+- **CloudLinux only**: ~3.4 TB with `rsync -H`, ~3.8 TB without (measured 2026-10)
+- **SWNG only**: ~600 GB with `rsync -H`, ~760 GB without
+- **Combined**: ~4 TB with `rsync -H`
+
+> The CloudLinux (`/cloudlinux/`) half is useful only for clients you point at it manually (`baseurl`) or for offline use. The public mirrorlist service hands out only `/swng/` URLs, so registering a mirror never sends it `/cloudlinux/` traffic.
 
 These are rough estimates and will vary based on:
 - CloudLinux versions included
@@ -193,7 +195,7 @@ The Nginx configuration enables directory browsing, so you can navigate the repo
 
 - The initial sync runs asynchronously and may take several hours (or even days for complete mirrors)
 - Monitor the log file(s) to track sync progress
-- Ensure sufficient disk space before running (1+ TB recommended for complete mirrors)
+- Ensure sufficient disk space before running (~4 TB for a complete combined mirror)
 - The timer will automatically sync every 4 hours by default
 - In combined mode, CloudLinux syncs first, then SWNG
 - In separate mode, timers can be configured with different schedules if needed

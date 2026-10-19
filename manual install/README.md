@@ -30,8 +30,8 @@ Ensure you have sufficient disk space. Repository mirrors can require several hu
 **Storage recommendation:** Use a dedicated disk or partition for mirror storage to avoid filling the root filesystem and to improve I/O performance.
 
 **Sizing guidance:**
-- SWNG mirror size is approximately **500 GB**
-- The full `repo.cloudlinux.com` (CloudLinux repository) is **3+ TB**
+- SWNG mirror size is approximately **600 GB** with `rsync -H` (~760 GB without)
+- The full `repo.cloudlinux.com` (CloudLinux repository) is **~3.4 TB** with `rsync -H` (~3.8 TB without)
 - In most cases, **sync `repo.cloudlinux.com` only partially** (only the repositories you actually need)
 
 **Recommendation:** For most production environments, prioritize mirroring **SWNG** (the main operational repository) as it contains all packages needed for operational systems.
