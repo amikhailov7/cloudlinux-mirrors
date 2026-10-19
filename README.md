@@ -4,7 +4,16 @@ This repository contains ready-to-use Ansible playbooks, Docker Compose setups, 
 
 For background on the mirror system changes (legacy XMLRPC/custom SSL to standard HTTPS) and the migration guide, see the public KB article: **CloudLinux Mirror System: What Is Changing and How to Migrate** [CloudLinux Support KB](https://cloudlinux.zendesk.com/hc/en-us/articles/26200193937052-CloudLinux-Mirror-System-What-Is-Changing-and-How-to-Migrate?brand_id=1568765).
 
-Currently **CloudLinux OS 10** is supported. Support for older versions (8, 9) will be enabled gradually.
+**CloudLinux OS 7, 8, 9 and 10** clients get their repositories from the mirror service once both packages below are at or above these versions:
+
+| OS | `cloudlinux-release` | `rhn-client-tools` |
+|---|---|---|
+| CloudLinux OS 7 | 7.9-2.15.el7h | 2.0.2-54 (2.0.2-55 or newer recommended) |
+| CloudLinux OS 8 | 8.10-14 | 3.0.3-1 |
+| CloudLinux OS 9 | 9.7-2 | 3.0.3-1 |
+| CloudLinux OS 10 | all releases | all releases |
+
+Both packages are required: `cloudlinux-release` adds the mirrorlist repository, but the CLN channel (same repo id) shadows it until `rhn-client-tools` is updated too, and `cloudlinux-release` does not pull in the new `rhn-client-tools`, so updating `cloudlinux-release` alone silently stays on CLN.
 
 ## Table of Contents
 
@@ -74,7 +83,7 @@ If the recommended setup doesn't fit your needs, choose one of these alternative
 
 ### specific-version-rsync
 
-Mirrors **only SWNG for specific CloudLinux versions** (10 now; 8/9 coming soon).
+Mirrors **only SWNG for a specific CloudLinux version**: CloudLinux 10 only (enforced by the playbook/container); to serve CloudLinux OS 7-9 clients use complete SWNG rsync.
 
 - Smallest storage footprint
 - Version-specific systemd services and timers

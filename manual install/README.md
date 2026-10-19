@@ -3,7 +3,7 @@
 This document contains **manual, step-by-step installation instructions** for setting up CloudLinux mirrors.
 It mirrors what the Ansible playbooks in this repository do, but in a copy/paste friendly format.
 
-**Current support:** CloudLinux **10** is supported now. Support for older versions (9/8/...) will be enabled gradually.
+**Current support:** CloudLinux **7, 8, 9 and 10** clients use the mirror service, provided `cloudlinux-release` and `rhn-client-tools` meet the minimum versions listed in the [main README](../README.md).
 
 If you prefer automation, use the corresponding playbooks:
 - `ansible/combined-mirror/`
@@ -497,7 +497,7 @@ For automation (systemd timers, Nginx templating, and certbot renewal), see `ans
 ## 3. Specific-version-rsync: Mirroring Specific SWNG Versions with RSync (Recommended)
 
 This manual example mirrors what `ansible/specific-version-rsync(Recomended)` does in its **default** mode:
-- CloudLinux version mirrored: **10** (8/9 support is coming soon)
+- CloudLinux version mirrored: **10**
 - Mirror path: `/var/www/mirrors/swng/10`
 - RSync source: `rsync://rsync.upstream.cloudlinux.com/SWNG/10/`
 - systemd units: `swng-10-mirror.service` + `swng-10-mirror.timer` (every 6 hours)

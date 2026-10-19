@@ -31,7 +31,6 @@ Approximate requirements:
 ### Volume Mounts
 
 - `./mirror-data/10` - Mirror repository data for CloudLinux 10 (persistent)
-- `./mirror-data/8` - Mirror repository data for CloudLinux 8 (persistent)
 - `./logs` - Log files (persistent)
 - `certbot-etc` - Let's Encrypt certificates (persistent volume)
 - `certbot-www` - ACME webroot (persistent volume)
@@ -137,7 +136,7 @@ docker compose exec swng-10-mirror /usr/local/bin/sync-script.sh
 The Docker Compose setup includes an Nginx service that automatically serves the mirrors. The mirrors are accessible via:
 
 - **CloudLinux 10**: `http://localhost/swng/10/`
-- **CloudLinux 8**: `http://localhost/swng/8/` (Temporary unavalible)
+- **CloudLinux OS 7-9**: not served. CloudLinux 10 only (enforced by the container); to serve CloudLinux OS 7-9 clients use complete SWNG rsync.
 - **Network access**: `http://<server-ip>/swng/<version>/`
  - **HTTPS**: `https://<your-domain>/swng/<version>/`
 

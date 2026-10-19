@@ -48,7 +48,7 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ### Version Support
 
-CloudLinux 10 is supported now. CloudLinux 8/9 support is coming soon.
+CloudLinux 10 only (enforced by the playbook); to serve CloudLinux OS 7-9 clients use complete SWNG rsync. Client-side requirements for CloudLinux OS 7, 8, 9 and 10 are listed in the [main README](../../README.md).
 ## How to Install
 Edit `inventory.ini` to specify your mirror server(s):
 

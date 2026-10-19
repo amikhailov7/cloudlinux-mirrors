@@ -25,14 +25,14 @@ certbot_cron_schedule:
 # List of repositories to sync
 # Source: https://upstream.cloudlinux.com/swng/
 swng_repos:
-  # Currently supported: CloudLinux 10 (8/9 coming soon)
+  # Ships CloudLinux 10 repos by default;
+  # uncomment the SWNG-9/8 entries to add them
   - name: SWNG-10-x86_64
     baseurl: https://upstream.cloudlinux.com/swng/10/x86_64/
     # Used by reposync for modular repositories
     module_platform_id: platform:el10
     enabled: true
 
-  # Coming soon:
   #- name: SWNG-9-x86_64
   #  baseurl: https://upstream.cloudlinux.com/swng/9/x86_64/
   #  module_platform_id: platform:el9

@@ -49,11 +49,22 @@ Default variables are defined in `defaults/main.yml`. You can customize the play
 The `swng_repos` variable defines which repositories to sync. Default configuration:
 ```yaml
 swng_repos:
-  # Currently supported: CloudLinux 10 (8/9 coming soon)
+  # Ships CloudLinux 10 repos by default;
+  # uncomment the SWNG-9/8 entries to add them
   - name: SWNG-10-x86_64
     baseurl: https://upstream.cloudlinux.com/swng/10/x86_64/
+    # Used by reposync for modular repositories
     module_platform_id: platform:el10
     enabled: true
+
+  #- name: SWNG-9-x86_64
+  #  baseurl: https://upstream.cloudlinux.com/swng/9/x86_64/
+  #  module_platform_id: platform:el9
+  #  enabled: true
+  #- name: SWNG-8-x86_64
+  #  baseurl: https://upstream.cloudlinux.com/swng/8/x86_64/
+  #  module_platform_id: platform:el8
+  #  enabled: true
 ```
 
 ## Usage
@@ -71,9 +82,9 @@ ansible-playbook -i inventory.ini playbook.yml \
   -e "mirror_base_path=/opt/mirrors" \
   -e "sync_interval_hours=4"
 ```
-## Sync Only CloudLinux 10 SWNG (current support)
+## Sync Only CloudLinux 10 SWNG
 
-CloudLinux 10 is supported now. CloudLinux 8/9 support is coming soon.
+Ships CloudLinux 10 repos by default; uncomment the SWNG-9/8 entries in `defaults/main.yml` to add them. Client-side requirements for CloudLinux OS 7, 8, 9 and 10 are listed in the [main README](../../README.md).
 
 To sync only CloudLinux 10 SWNG, keep only `SWNG-10-x86_64` enabled in `defaults/main.yml`.
 
@@ -141,11 +152,22 @@ certbot_cron_schedule:
 # List of repositories to sync
 # Source: https://upstream.cloudlinux.com/swng/
 swng_repos:
-  # Currently supported: CloudLinux 10 (8/9 coming soon)
+  # Ships CloudLinux 10 repos by default;
+  # uncomment the SWNG-9/8 entries to add them
   - name: SWNG-10-x86_64
     baseurl: https://upstream.cloudlinux.com/swng/10/x86_64/
+    # Used by reposync for modular repositories
     module_platform_id: platform:el10
     enabled: true
+
+  #- name: SWNG-9-x86_64
+  #  baseurl: https://upstream.cloudlinux.com/swng/9/x86_64/
+  #  module_platform_id: platform:el9
+  #  enabled: true
+  #- name: SWNG-8-x86_64
+  #  baseurl: https://upstream.cloudlinux.com/swng/8/x86_64/
+  #  module_platform_id: platform:el8
+  #  enabled: true
 ```
 Run with:
 ```bash
