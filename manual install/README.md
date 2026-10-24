@@ -8,15 +8,15 @@ It mirrors what the Ansible playbooks in this repository do, but in a copy/paste
 If you prefer automation, use the corresponding playbooks:
 - `ansible/combined-mirror/`
 - `ansible/complete-swng-rsync/`
-- `ansible/specific-version-rsync(Recomended)/`
+- `ansible/specific-version-rsync/`
 - `ansible/yum-reposync/`
 
 ## Table of Contents
 
 - [Prepare Storage](#prepare-storage)
 - [1. Combined-mirror: Mirroring SWNG + CloudLinux with RSync](#1-combined-mirror-mirroring-swng--cloudlinux-with-rsync)
-- [2. Complete-swng-rsync: Mirroring the Complete SWNG Repository with RSync](#2-complete-swng-rsync-mirroring-the-complete-swng-repository-with-rsync)
-- [3. Specific-version-rsync: Mirroring Specific SWNG Versions with RSync (Recommended)](#3-specific-version-rsync-mirroring-specific-swng-versions-with-rsync-recommended)
+- [2. Complete-swng-rsync: Mirroring the Complete SWNG Repository with RSync (Recommended)](#2-complete-swng-rsync-mirroring-the-complete-swng-repository-with-rsync-recommended)
+- [3. Specific-version-rsync: Mirroring Specific SWNG Versions with RSync](#3-specific-version-rsync-mirroring-specific-swng-versions-with-rsync)
 - [yum-reposync: Mirroring SWNG repositories with `reposync`](#yum-reposync-mirroring-swng-repositories-with-reposync)
 - [Adding /healthcheck to Existing Manual Installations](#adding-healthcheck-to-existing-manual-installations)
 - [Advanced Options](#advanced-options)
@@ -273,7 +273,7 @@ curl -I https://mirror.example.com/swng/ || true
 For the full automation (including optional separate timers, Nginx templating, and certbot renewal), see `ansible/combined-mirror/README.md`.
 
 
-## 2. Complete-swng-rsync: Mirroring the Complete SWNG Repository with RSync
+## 2. Complete-swng-rsync: Mirroring the Complete SWNG Repository with RSync (Recommended)
 
 This manual example mirrors what `ansible/complete-swng-rsync` does in its **default** mode:
 - Mirror path: `/var/www/mirrors/swng`
@@ -494,9 +494,11 @@ curl -I https://mirror.example.com/swng/ || true
 For automation (systemd timers, Nginx templating, and certbot renewal), see `ansible/complete-swng-rsync/README.md`.
 
 
-## 3. Specific-version-rsync: Mirroring Specific SWNG Versions with RSync (Recommended)
+## 3. Specific-version-rsync: Mirroring Specific SWNG Versions with RSync
 
-This manual example mirrors what `ansible/specific-version-rsync(Recomended)` does in its **default** mode:
+> Serves one version under `/swng/<version>/`; intended for your own servers with a fixed `baseurl`. Not eligible for the public mirror service, use the complete-swng-rsync setup above for that.
+
+This manual example mirrors what `ansible/specific-version-rsync` does in its **default** mode:
 - CloudLinux version mirrored: **10**
 - Mirror path: `/var/www/mirrors/swng/10`
 - RSync source: `rsync://rsync.upstream.cloudlinux.com/SWNG/10/`
@@ -702,7 +704,7 @@ nginx -t && systemctl reload nginx
 curl -I https://mirror.example.com/swng/10/ || true
 ```
 
-For automation (systemd timers, Nginx templating, and certbot renewal), see `ansible/specific-version-rsync(Recomended)/README.md`.
+For automation (systemd timers, Nginx templating, and certbot renewal), see `ansible/specific-version-rsync/README.md`.
 
 
 ## yum-reposync: Mirroring SWNG repositories with `reposync`
